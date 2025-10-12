@@ -1,0 +1,103 @@
+.TH GIT\-OVERVIEW 1 "2025-01-20" "git-overview" "Git Repository Overview Tool"
+.SH NAME
+git\-overview \- Retrieve the current status of all Git repositories in a directory and its subdirectories
+.SH SYNOPSIS
+.B git\-overview
+[\fIOPTIONS\fR] [\fIDIRECTORY\fR]
+.SH DESCRIPTION
+.B git\-overview
+is a standalone tool and Git extension that recursively searches through directories to find all Git repositories and displays their current status. It shows information about how many commits each branch is ahead or behind its remote counterpart, making it easy to see the synchronization status of multiple repositories at once.
+
+The tool supports parallel processing for efficient scanning of large directory trees and provides multiple output formats including colored tables, simple text, and CSV.
+.SH OPTIONS
+.SS Positional Arguments
+.TP
+\fBDIRECTORY\fR
+The directory to start searching for Git repositories (default: current directory)
+.SS Git Options
+.TP
+\fB\-m\fR, \fB\-\-main\fR
+Include main/master branch if current branch is different
+.TP
+\fB\-b\fR, \fB\-\-branch\fR \fIBRANCH_LIST\fR
+Additional branches to check (comma-separated list)
+.TP
+\fB\-e\fR, \fB\-\-exclude\fR \fIDIR_LIST\fR
+Comma-separated list of directories to exclude from search
+.SS Output Options
+.TP
+\fB\-f\fR, \fB\-\-format\fR \fIFORMAT\fR
+Output format (choices: pretty, simple, csv; default: pretty)
+.TP
+\fB\-s\fR, \fB\-\-sort\fR \fIFIELD\fR
+Sort output by field (choices: repo, ahead, behind; default: repo)
+.SH OUTPUT FORMATS
+.SS Pretty Format (Default)
+When stdout is a TTY and format is 'pretty', the output uses ANSI colors and Unicode box-drawing characters for an attractive display. The table shows:
+.RS
+.IP \(bu 2
+Repository name
+.IP \(bu 2
+Branch name (in blue)
+.IP \(bu 2
+Ahead count (in green if > 0)
+.IP \(bu 2
+Behind count (in red if > 0)
+.RE
+.SS Simple Format
+Uses plain ASCII characters without colors, suitable for basic terminals.
+.SS CSV Format
+Comma-separated values output, ideal for scripting and data processing.
+.SH EXAMPLES
+.TP
+.B git\-overview
+Scan current directory and display repository status in pretty format
+.TP
+.B git\-overview /path/to/projects
+Scan specified directory for Git repositories
+.TP
+.B git\-overview \-m \-b develop,feature/new
+Include main/master and additional branches 'develop' and 'feature/new'
+.TP
+.B git\-overview \-e node_modules,build \-f csv
+Exclude node_modules and build directories, output as CSV
+.TP
+.B git\-overview \-f simple \-s ahead
+Use simple format sorted by ahead count
+.TP
+.B git\-overview \-\-branch staging \-\-format csv > status.csv
+Check staging branch and save output to CSV file
+.SH EXIT STATUS
+.IP 0
+Success
+.IP 1
+Error occurred
+.SH BEHAVIOR
+The tool automatically excludes directories starting with '.' (dot directories) during traversal. When a Git repository is found, it doesn't traverse into its subdirectories since they're part of the same repository.
+
+The tool uses parallel processing with thread pools for optimal performance on large directory trees. By default, it uses a number of workers equal to the number of CPU cores plus four, up to a maximum of 32.
+
+For each repository, the tool runs 'git fetch' to update remote information before checking branch status. If fetching times out (30 seconds), it continues with stale data rather than failing.
+.SH FILES
+The tool respects standard Git configuration and works with any Git repository structure.
+.SH NOTES
+The ahead/behind counts represent the number of commits that exist locally but not on the remote (ahead) and vice versa (behind). A repository is considered "in sync" when both counts are zero.
+
+When using the \-\-main option, both 'main' and 'master' branch names are checked, as different projects may use either naming convention.
+.SH BUGS
+Timeout during git fetch may result in stale remote information being displayed.
+
+The tool may fail to access directories due to permission restrictions, which will be reported but won't stop the overall process.
+
+Very long repository or branch names may be truncated in the table output.
+.SH AUTHOR
+David Bellot
+.SH COPYRIGHT
+Copyright \(co 2025 David Bellot
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+.SH SEE ALSO
+.BR git (1),
+.BR git-status (1),
+.BR git-fetch (1)
