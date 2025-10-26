@@ -61,10 +61,10 @@ def find_git_repos(start_path: Path, exclude: List[Path]) -> Set[Path]:
         exclude_set = {p.resolve() for p in exclude}
         
         try:
-            for root, dirs, _ in os.walk(str(start_path), topdown=True):
+            for root, dirs, _ in os.walk(str(start_path), topdown=True,  followlinks=True):
                 current_path = Path(root)
                 
-                if current_path not in exclude_set:
+                if current_path.resolve() not in exclude_set:
                     rel_path = current_path.relative_to(start_path)
                     is_dot_dir = any(part.startswith('.') for part in rel_path.parts)
                     
