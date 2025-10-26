@@ -31,8 +31,7 @@ setup(
     url="https://github.com/yimyom/git-overview/",
     author="David Bellot",
     author_email="david.bellot@gmail.com",
-    package_dir={"": "src"},
-    packages=find_packages(where="src"),
+    packages=find_packages(where="."),
     python_requires=">=3.9, <4",
     project_urls={
         "Bug Reports": "https://github.com/yimyom/git-overview/issues",
