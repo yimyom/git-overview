@@ -17,6 +17,8 @@ classifiers = [
     "Programming Language :: Python",
     "Operating System :: OS Independent",
 ]
+[project.scripts]
+git-overview = "git_overview:main"
 
 [project.urls]
 Homepage = "https://github.com/yimyom/git-overview"
