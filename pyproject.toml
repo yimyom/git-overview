@@ -17,6 +17,7 @@ classifiers = [
     "Programming Language :: Python",
     "Operating System :: OS Independent",
 ]
+
 [project.scripts]
 git-overview = "git_overview:main"
 
@@ -26,3 +27,10 @@ Documentation = "https://github.com/yimyom/git-overview"
 Repository = "https://github.com/yimyom/git-overview"
 Changelog = "https://github.com/yimyom/git-overview/blob/master/Changelog"
 Issues = "https://github.com/yimyom/git-overview/issues"
+
+[tool.setuptools.data-files]
+"share/man/man1" = ["man/git-overview.1"]
+
+[tool.setuptools]
+py-modules = ["git_overview"]
+
