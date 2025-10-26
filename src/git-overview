@@ -24,7 +24,6 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import List, Set, Tuple
 #from icecream import ic
-#import datetime
 
 #--------------------------------
 # Find git repositories
@@ -334,12 +333,20 @@ def parse_command_line():
                         default='pretty', help='Format output')
     parser.add_argument('-s', '--sort', choices=['repo','ahead','behind'],
                         default='repo', help='Sort output')
+    parser.add_argument('-V', '--version', action='store_true', help='Print version')
     args = parser.parse_args()
 
     return args
 
 def main():
     args = parse_command_line()
+    if args.version:
+        print('Git overview 0.1')
+        print('Copyright (C) 2025 David Bellot')
+        print('License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.')
+        print('This is free software: you are free to change and redistribute it.')
+        print('There is NO WARRANTY, to the extent permitted by law.')
+        sys.exit(0)
     
     # Branches to check
     extra_branches = []

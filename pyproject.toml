@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "git-overview"
+version = "0.1"
+requires-python = ">=3.9"
+authors = [ { name="David Bellot", email="david.bellot@gmail.com" }, ]
+maintainers = [ { name="David Bellot", email="david.bellot@gmail.com" }, ]
+description = "Quick and pretty overview of many git local repositories at once compared to their remotes"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+license-files = ["LICEN[CS]E*"]
+keywords = ["git"]
+classifiers = [
+    "Programming Language :: Python",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/yimyom/git-overview"
+Documentation = "https://github.com/yimyom/git-overview"
+Repository = "https://github.com/yimyom/git-overview"
+Changelog = "https://github.com/yimyom/git-overview/blob/master/Changelog"
+Issues = "https://github.com/yimyom/git-overview/issues"
