@@ -2,7 +2,7 @@
 
 A powerful command-line tool to quickly scan directories and display the status of all Git repositories. Get an overview of which repositories are ahead/behind their remotes across your entire projects folder.
 
-<img width="696" height="576" alt="image" src="https://github.com/user-attachments/assets/e03ecd5b-3241-4b2c-b363-9ba4bd8ad916" />
+<img width="522" height="432" alt="image" src="https://github.com/user-attachments/assets/e4cee351-5ee8-4ae8-97f3-621c487af6d8" />
 
 ## Features
 
