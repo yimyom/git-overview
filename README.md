@@ -28,12 +28,6 @@ chmod +x git-overview.py
 sudo mv git-overview.py /usr/local/bin/git-overview
 ```
 
-### Install as DEB Package (Ubuntu/Debian)
-```bash
-wget https://github.com/yourusername/git-overview/releases/latest/download/git-overview_all.deb
-sudo dpkg -i git-overview_all.deb
-```
-
 ## Usage
 It can be invoked
 ```bash
